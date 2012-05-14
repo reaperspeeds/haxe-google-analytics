@@ -1,5 +1,7 @@
-<project name="ganalytics" url="http://www.ancientsheep.com" license="MIT">
+<project name="ganalytics" url="http://code.google.com/p/haxe-google-analytics/" license="Public">
     <user name="mourlamstudios"/>
- 	<description>GAnalytics allows Google Analyics inside your mobile apps (iOS only for now).</description>
+ 	<description>Google Analyics inside your mobile apps (iOS target supported - Android coming soon!). Supports page views, event tracking, custom variables and crash events.</description>
     <version name="1.0">Initial Release</version>
+    <depends name="hxcpp"/>
+    <depends name="nme"/>
 </project>
