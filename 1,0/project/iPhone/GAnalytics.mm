@@ -35,12 +35,28 @@ namespace ganalytics
 
 	void startTracker(const char *accountID,int dispatchPeriod)
 	{
-		NSString *account = [[NSString alloc] initWithUTF8String:accountID];
+		NSString 	*account = [[NSString alloc] initWithUTF8String:accountID];
+		NSError		*error = nil;
 
 		NSLog(@"ganalytics :: startTracker");
 		[[GANTracker sharedTracker] startTrackerWithAccountID:account
 	                                           dispatchPeriod:dispatchPeriod
 	                                               	 delegate:nil];
+
+		// Set custom variables
+		if (![[GANTracker sharedTracker] setCustomVariableAtIndex:1
+			name:@"userID"
+			value:@"user_id"
+			withError:&error])
+		{
+			// Handle error here
+			NSLog(@"** ERROR : ganalytics :: startTracker - setCustomVariableAtIndex");
+		}
+
+		else
+		{
+			NSLog(@"ganalytics :: setCustomVarialbeAtIndex");
+		}
 	}
 
 	void trackPageView(const char *pageName)
