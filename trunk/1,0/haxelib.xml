@@ -1,0 +1,5 @@
+<project name="ganalytics" url="http://www.ancientsheep.com" license="MIT">
+    <user name="mourlamstudios"/>
+ 	<description>GAnalytics allows Google Analyics inside your mobile apps (iOS only for now).</description>
+    <version name="1.0">Initial Release</version>
+</project>
