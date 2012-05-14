@@ -4,6 +4,8 @@
 
 //using namespace nme;
 
+//void uncaughtExceptionHandler(NSException *exception);
+
 namespace ganalytics
 {
 	//GA
@@ -33,30 +35,37 @@ namespace ganalytics
 		//	[[GANTracker sharedTracker] setDebug: true];
 	}
 
+	void setCustomVar(int index,const char*name,const char *value)
+	{
+		NSString 	*namer = [[NSString alloc] initWithUTF8String:name];
+		NSString 	*valuer = [[NSString alloc] initWithUTF8String:value];
+		NSError		*error = nil;
+
+
+		// Set custom variables
+		if (![[GANTracker sharedTracker] setCustomVariableAtIndex:index name:namer value:valuer withError:&error])
+		{
+			// Handle error here
+			NSLog(@"** ERROR : ganalytics :: setCustomVar");
+		}
+
+		else
+		{
+			NSLog(@"ganalytics :: setCustomVar... SUCCESS");
+		}
+	}
+
 	void startTracker(const char *accountID,int dispatchPeriod)
 	{
 		NSString 	*account = [[NSString alloc] initWithUTF8String:accountID];
-		NSError		*error = nil;
 
 		NSLog(@"ganalytics :: startTracker");
 		[[GANTracker sharedTracker] startTrackerWithAccountID:account
 	                                           dispatchPeriod:dispatchPeriod
 	                                               	 delegate:nil];
 
-		// Set custom variables
-		if (![[GANTracker sharedTracker] setCustomVariableAtIndex:1
-			name:@"userID"
-			value:@"user_id"
-			withError:&error])
-		{
-			// Handle error here
-			NSLog(@"** ERROR : ganalytics :: startTracker - setCustomVariableAtIndex");
-		}
+		[account release];
 
-		else
-		{
-			NSLog(@"ganalytics :: setCustomVarialbeAtIndex");
-		}
 	}
 
 	void trackPageView(const char *pageName)
@@ -103,6 +112,26 @@ namespace ganalytics
 		NSLog(@"stopTracker");
 		[[GANTracker sharedTracker] stopTracker];
 	}
+
+	void setupGACrashReporting()
+	{
+		//NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+	}
+
+	/*void uncaughtExceptionHandler(NSException *exception)
+	{
+		NSLog(@"Unhandled Exception");
+
+		NSError *error;
+		[[GANTracker sharedTracker] trackEvent:@"Unhandled Exception (Crash)"
+		                                       action:exception.name
+		                                        label:exception.reason
+		                                        value:0
+		                                    withError:&error];
+
+		//Dispatch now
+		[[GANTracker sharedTracker] dispatch];
+	}*/
 
 	/**
 	Keep for reference from Hxgk

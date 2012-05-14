@@ -22,6 +22,15 @@ value ganalytics_debug_mode(int deb)
 }
 DEFINE_PRIM(ganalytics_debug_mode,1);
 
+value ganalytics_set_custom_var(int index,value name,value val)
+{
+	#ifdef IPHONE
+	setCustomVar(index,val_string(name),val_string(val));
+	return alloc_null();
+	#endif
+}
+DEFINE_PRIM(ganalytics_set_custom_var,3);
+
 value ganalytics_start_tracker(value acountID,int disPatchPeriod)
 {
 	#ifdef IPHONE
@@ -68,6 +77,14 @@ value ganalytics_stop_tracker()
 }
 DEFINE_PRIM(ganalytics_stop_tracker,0);
 
+value ganalytics_setup_crash_reporting()
+{
+	#ifdef IPHONE
+	setupGACrashReporting();
+	return alloc_null();
+	#endif
+}
+DEFINE_PRIM(ganalytics_setup_crash_reporting,0);
 
 extern "C" 
 {
