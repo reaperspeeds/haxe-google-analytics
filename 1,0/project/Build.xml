@@ -6,8 +6,11 @@
 <set name="mobile" value="1"/>
 
 <set name="ndll-tool" value="static"/>
-<set name="name_extra" value=".iphoneos" if="iphoneos"/>
-<set name="name_extra" value=".iphonesim" if="iphonesim"/><include name="${HXCPP}/build-tool/BuildCommon.xml"/>
+<set name="IOS_ARCH" value="-v7" if="HXCPP_ARMV7" />
+<set name="name_extra" value=".iphoneos${IOS_ARCH}" if="iphoneos"/>
+<set name="name_extra" value=".iphonesim" if="iphonesim"/>
+
+<include name="${HXCPP}/build-tool/BuildCommon.xml"/>
 <set name="SLIBEXT" value=".a"/>
 
 <files id="iphone">
