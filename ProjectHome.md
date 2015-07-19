@@ -1,0 +1,1 @@
+Google Analytics for Haxe / NME. Currently available for iOS. Next release will include Android support.
